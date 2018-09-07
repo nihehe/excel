@@ -171,86 +171,37 @@
 <script>
      //表单
      function excel() {
+         let table=document.querySelector("table");
          let add=document.querySelector(".add");
-         let table=document.querySelector("tbody");
-         let button=document.querySelectorAll("td button");
-         let items=document.querySelectorAll("td");
-         items.forEach(function (v) {
-             v.ondblclick = function () {
+         let tbody=document.querySelector("tbody");
+         table.ondblclick=function (event) {
+             let src=event.target;
+             if (src.nodeName=="TD"&&src.firstChild.nodeName!="BUTTON"){
                  let input = document.createElement("input");
-                 input.value = v.innerHTML;
-                 v.innerHTML = "";
-                 v.appendChild(input);
+                 input.value = src.innerHTML;
+                 src.innerHTML = "";
+                 src.appendChild(input);
                  input.focus();
                  input.onblur = function () {
-                     v.innerHTML = input.value;
+                     src.innerHTML = input.value;
                  }
              }
-         });
-         button.forEach(function (v) {
-             v.onclick = function () {
-                 let tr = v.parentNode.parentNode;
+         }
+         table.onclick = function (event) {
+             let src=event.target;
+             if (src.innerHTML=="删除") {
+                 let tr = src.parentNode.parentNode;
                  tr.parentNode.removeChild(tr);
              }
-         });
-         add.onclick = function () {
+         }
+         add.onclick = function (event) {
+             let src=event.target;
+             if (src.innerHTML=="添加") {
              let tr = document.createElement("tr");
-             tr.innerHTML="<td>1</td>\n" +
-                 "            <td>2</td>\n" +
-                 "            <td>3</td>\n" +
-                 "            <td>4</td>\n" +
-                 "            <td>5</td>\n" +
-                 "            <td>6</td>\n" +
-                 "            <td>7</td>\n" +
-                 "            <td>8</td>\n" +
-                 "            <td>9</td>\n" +
-                 "            <td>10</td>\n" +
-                 "            <td><button>删除</button></td>";
-             // let td = document.createElement("td");
-             // td.innerHTML = "1";
-             // let td1 = document.createElement("td");
-             // td1.innerHTML = "2";
-             // let td2 = document.createElement("td");
-             // td2.innerHTML = "3";
-             // let td3 = document.createElement("td");
-             // td3.innerHTML = "4";
-             // let td4 = document.createElement("td");
-             // td4.innerHTML = "5";
-             // let td5 = document.createElement("td");
-             // td5.innerHTML = "6";
-             // let td6 = document.createElement("td");
-             // td6.innerHTML = "7";
-             // let td7 = document.createElement("td");
-             // td7.innerHTML = "8";
-             // let td8 = document.createElement("td");
-             // td8.innerHTML = "9";
-             // let td9 = document.createElement("td");
-             // td9.innerHTML = "10";
-             // let td10 = document.createElement("td");
-             // td10.innerHTML = "<button>删除</button>";
-             // tr.appendChild(td);
-             // tr.appendChild(td1);
-             // tr.appendChild(td2);
-             // tr.appendChild(td3);
-             // tr.appendChild(td4);
-             // tr.appendChild(td5);
-             // tr.appendChild(td6);
-             // tr.appendChild(td7);
-             // tr.appendChild(td8);
-             // tr.appendChild(td9);
-             // tr.appendChild(td10);
-             table.appendChild(tr);
-             // td10.onclick = function (event) {
-             //     if (event.target.innerHTML=="删除"){
-             //         let tr = td10.parentNode;
-             //         tr.parentNode.removeChild(tr);
-             //     }
-             // }
-             excel();
+             tr.innerHTML="<td>1</td>\n" + "<td>2</td>\n" + "<td>3</td>\n" + "<td>4</td>\n" + "<td>5</td>\n" + "<td>6</td>\n" + "<td>7</td>\n" + "<td>8</td>\n" + "<td>9</td>\n" + "<td>10</td>\n" + "<td><button>删除</button></td>";
+             tbody.appendChild(tr);
          }
      }
+     }
      excel();
-
-
-
 </script>
